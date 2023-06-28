@@ -18,7 +18,7 @@ importers:
         specifier: 10.1.156
         version: 10.1.156
       sst:
-        specifier: ^2.17.6
+        specifier: 2.17.6
         version: 2.17.6
       typescript:
         specifier: ^5.1.5
@@ -34,7 +34,7 @@ importers:
         specifier: ^20.3.2
         version: 20.3.2
       sst:
-        specifier: ^2.17.6
+        specifier: 2.17.6
         version: 2.17.6
       vitest:
         specifier: ^0.32.2
@@ -49,7 +49,7 @@ importers:
         specifier: ^20.3.2
         version: 20.3.2
       sst:
-        specifier: ^2.17.6
+        specifier: 2.17.6
         version: 2.17.6
       vitest:
         specifier: ^0.32.2
@@ -2910,7 +2910,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
     dev: true
 
@@ -3189,7 +3189,7 @@ packages:
     resolution: {integrity: sha512-rraC8NXWOEjhADbZe9QBNzLAN5Q3fsTPQtBV+fEVj6xKIgDgNiEVE6ZNfHpZOqfQ21YUzfVNUXLOEZquYvQPPg==}
     dependencies:
       leven: 2.1.0
-      minimist: 1.2.6
+      minimist: 1.2.8
     dev: true
 
   /compress-commons@4.1.1:
@@ -3433,7 +3433,7 @@ packages:
   /duplexer2@0.1.4:
     resolution: {integrity: sha512-asLFVfWWtJ90ZyOUHMqk7/S2w2guQKxUI2itj3d92ADHhxUSbCMGi1f1cBcJ7xM1To+pE/Khbwo1yuNbMEPKeA==}
     dependencies:
-      readable-stream: 2.1.5
+      readable-stream: 2.3.8
     dev: true
 
   /duplexify@3.7.1:
@@ -4621,7 +4621,7 @@ packages:
       duplexify: 4.1.2
       help-me: 3.0.0
       inherits: 2.0.4
-      minimist: 1.2.6
+      minimist: 1.2.8
       mqtt-packet: 6.10.0
       pump: 3.0.0
       readable-stream: 3.6.2
