@@ -13,10 +13,10 @@ importers:
         version: 16.1.0
       aws-cdk-lib:
         specifier: 2.84.0
-        version: 2.84.0(constructs@10.1.156)
+        version: 2.84.0(constructs@10.2.62)
       constructs:
-        specifier: 10.1.156
-        version: 10.1.156
+        specifier: 10.2.62
+        version: 10.2.62
       sst:
         specifier: ^2.17.6
         version: 2.17.6
@@ -2711,6 +2711,39 @@ packages:
       - table
       - yaml
 
+  /aws-cdk-lib@2.84.0(constructs@10.2.62):
+    resolution: {integrity: sha512-4zLtCLCIs5Ia4WRGqiXRwxSkpGaNy3NxMexO9qYHSuIYpqf4sHObzZ0tDHZCFL5Wkui3sCu3OLQWrRHrr93HvA==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/asset-awscli-v1': 2.2.199
+      '@aws-cdk/asset-kubectl-v20': 2.1.2
+      '@aws-cdk/asset-node-proxy-agent-v5': 2.0.165
+      '@balena/dockerignore': 1.0.2
+      case: 1.6.3
+      constructs: 10.2.62
+      fs-extra: 11.1.1
+      ignore: 5.2.4
+      jsonschema: 1.4.1
+      minimatch: 3.1.2
+      punycode: 2.3.0
+      semver: 7.5.3
+      table: 6.8.1
+      yaml: 1.10.2
+    dev: true
+    bundledDependencies:
+      - '@balena/dockerignore'
+      - case
+      - fs-extra
+      - ignore
+      - jsonschema
+      - minimatch
+      - punycode
+      - semver
+      - table
+      - yaml
+
   /aws-crt@1.15.18:
     resolution: {integrity: sha512-N66E/3tvkvFjGIcCXf4tZBakvGCUBMdxkJ7l1Hnwr2biW5AL55uTI7ww+P003XXxP1Njm494EHdC+UmYvZeXYw==}
     requiresBuild: true
@@ -3249,6 +3282,11 @@ packages:
   /constructs@10.1.156:
     resolution: {integrity: sha512-BTZ3Kyt++/YFlph/ioqbDhzSKVMqHRHvc99FxU4b705ZP6s2IkDxMLCMinC70USMTJWFbO1p02Egux7sk4q07A==}
     engines: {node: '>= 14.17.0'}
+    dev: true
+
+  /constructs@10.2.62:
+    resolution: {integrity: sha512-ScGqCVZXJ/vDsAIbDDHQy1ZKthSfJkoAS0X+XmH98wx9xIo2cJ7sGHQ1ISXRz7oBYuwdx3XEFSyiAQJiDDTrPQ==}
+    engines: {node: '>= 16.14.0'}
     dev: true
 
   /content-disposition@0.5.4:
