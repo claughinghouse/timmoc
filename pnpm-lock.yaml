@@ -12,8 +12,8 @@ importers:
         specifier: ^16.1.0
         version: 16.1.0
       aws-cdk-lib:
-        specifier: 2.84.0
-        version: 2.84.0(constructs@10.1.156)
+        specifier: 2.85.0
+        version: 2.85.0(constructs@10.1.156)
       constructs:
         specifier: 10.1.156
         version: 10.1.156
@@ -2698,6 +2698,29 @@ packages:
       semver: 7.5.3
       table: 6.8.1
       yaml: 1.10.2
+    dev: true
+    bundledDependencies:
+      - '@balena/dockerignore'
+      - case
+      - fs-extra
+      - ignore
+      - jsonschema
+      - minimatch
+      - punycode
+      - semver
+      - table
+      - yaml
+
+  /aws-cdk-lib@2.85.0(constructs@10.1.156):
+    resolution: {integrity: sha512-u+ypK8XEMRH3tGRMSmcbPYxLet7xBdGIztUkMcPtlNJGhS/vxqh12yYkem3g3zzmHwdX8OPLSnlZ2sIuiIqp/g==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/asset-awscli-v1': 2.2.199
+      '@aws-cdk/asset-kubectl-v20': 2.1.2
+      '@aws-cdk/asset-node-proxy-agent-v5': 2.0.165
+      constructs: 10.1.156
     dev: true
     bundledDependencies:
       - '@balena/dockerignore'
