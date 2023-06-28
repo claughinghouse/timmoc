@@ -10,6 +10,8 @@ export function API({ stack }: StackContext) {
     // },
     routes: {
       "GET /": "packages/functions/src/lambda.handler",
+      "GET /json": "packages/functions/src/json.handler",
+      "GET /text": "packages/functions/src/text.handler",
     },
   });
 
