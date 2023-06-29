@@ -15,12 +15,13 @@ export function API({ stack }: StackContext) {
       },
     },
     routes: {
+      "GET /{permalink}": "packages/functions/src/permalink.handler",
       "GET /json": "packages/functions/src/json.handler",
+      "GET /{permalink}/json": "packages/functions/src/jsonPermalink.handler",
       "GET /text": "packages/functions/src/text.handler",
-      "GET /{permalink}": "",
-      "GET /json/{permalink}": "",
-      "GET /text/{permalink}": "",
-      $default: "packages/functions/src/lambda.handler",
+      "GET /{permalink}/text": "packages/functions/src/textPermalink.handler",
+      "GET /": "packages/functions/src/default.handler",
+      $default: "packages/functions/src/404.handler",
     },
   });
 
