@@ -5,6 +5,13 @@ export const handler = ApiHandler(async () => {
   const response = randomQuote();
   return {
     statusCode: 200,
-    body: JSON.stringify({ commit_msg: response }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      hash: "HASH",
+      commit_msg: response,
+      permalink: "sha",
+    }),
   };
 });
