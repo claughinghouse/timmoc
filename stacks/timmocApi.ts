@@ -17,9 +17,9 @@ export function API({ stack }: StackContext) {
     routes: {
       "GET /json": "packages/functions/src/json.handler",
       "GET /text": "packages/functions/src/text.handler",
-      "GET /{id}": "",
-      "GET /json/{id}": "",
-      "GET /text/{id}": "",
+      "GET /{permalink}": "",
+      "GET /json/{permalink}": "",
+      "GET /text/{permalink}": "",
       $default: "packages/functions/src/lambda.handler",
     },
   });
