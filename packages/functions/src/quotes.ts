@@ -1,4 +1,6 @@
-export const quotes = [
+type Quote = string;
+
+export const quotes: Quote[] = [
   "¯_(ツ)_/¯",
   "&quot;Get that shit outta my master.&quot;",
   "#GrammarNazi",

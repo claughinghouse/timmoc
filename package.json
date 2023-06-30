@@ -2,6 +2,7 @@
   "name": "timmoc",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "engines": {
     "pnpm": ">=8"
   },

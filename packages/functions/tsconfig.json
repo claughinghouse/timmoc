@@ -4,7 +4,8 @@
     "module": "ESNext",
     "baseUrl": ".",
     "paths": {
-      "@timmoc/core/*": ["../core/src/*"]
+      "@timmoc/core/*": ["../core/src/*"],
+      "@timmoc/functions/*": ["./src/*"]
     }
   }
 }
