@@ -1,13 +1,13 @@
 import { ApiHandler } from "sst/node/api";
-import { getRandomQuote } from "./quotePicker.js";
+import { generateRandomQuote } from "./quotePicker.js";
 
 export const handler = ApiHandler(async () => {
-  const response = getRandomQuote();
+  const response = generateRandomQuote();
   return {
     statusCode: 200,
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(getRandomQuote()),
+    body: JSON.stringify(generateRandomQuote()),
   };
 });
