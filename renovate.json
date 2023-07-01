@@ -16,7 +16,7 @@
   "rebaseWhen": "conflicted",
   "commitBodyTable": true,
   "onboarding": false,
-  "baseBranches": [".*"],
+  "baseBranches": ["$default", ".*"],
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
