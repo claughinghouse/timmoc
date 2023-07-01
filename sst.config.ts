@@ -1,5 +1,5 @@
 import { SSTConfig } from "sst";
-import { API } from "./stacks/timmocApi";
+import { API } from "./stacks/timmocApi.js";
 
 export default {
   config(_input) {

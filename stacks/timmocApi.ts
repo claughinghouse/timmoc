@@ -10,16 +10,17 @@ export function API({ stack }: StackContext) {
         architecture: "arm_64",
         runtime: "nodejs18.x",
       },
+
       throttle: {
         rate: 10,
       },
     },
     routes: {
-      // "GET /{id}": "packages/functions/src/permalink.handler",
-      // "GET /json": "packages/functions/src/json.handler",
-      // "GET /{id}/json": "packages/functions/src/jsonPermalink.handler",
-      // "GET /text": "packages/functions/src/text.handler",
-      // "GET /{id}/text": "packages/functions/src/textPermalink.handler",
+      // "GET /{id}": "packages/functions/src/id.handler",
+      "GET /json": "packages/functions/src/json.handler",
+      // "GET /{id}/json": "packages/functions/src/jsonId.handler",
+      "GET /text": "packages/functions/src/default.handler",
+      // "GET /{id}/text": "packages/functions/src/textId.handler",
       "GET /": "packages/functions/src/default.handler",
       $default: "packages/functions/src/404.handler",
     },
@@ -28,4 +29,5 @@ export function API({ stack }: StackContext) {
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
+  return api;
 }
