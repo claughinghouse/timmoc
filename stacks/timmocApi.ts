@@ -18,7 +18,7 @@ export function API({ stack }: StackContext) {
     routes: {
       "GET /{id}": "packages/functions/src/id.handler",
       "GET /json": "packages/functions/src/json.handler",
-      // "GET /{id}/json": "packages/functions/src/jsonId.handler",
+      "GET /json/{id}": "packages/functions/src/jsonId.handler",
       "GET /": "packages/functions/src/default.handler",
       $default: "packages/functions/src/404.handler",
     },
