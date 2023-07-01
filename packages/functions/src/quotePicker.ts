@@ -1,15 +1,19 @@
-import quotesAsJson from "./quotes.json" assert { type: "json" };
+import hashedQuotes from "./hashedQuotes.json" assert { type: "json" };
 
-const quotes: { [key: number]: string } = quotesAsJson;
+interface Quote {
+  [key: string]: string;
+}
+
+const quotes: Quote = hashedQuotes;
 const keys = Object.keys(quotes);
 
 export function generateRandomQuote() {
   const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  const selectedQuote = quotes[parseInt(randomKey)];
+  const selectedQuote = quotes[randomKey];
   return { [randomKey]: selectedQuote };
 }
 
-export function getQuote(key: number) {
+export function getQuote(key: string) {
   const selectedQuote = quotes[key];
   if (key in quotes) {
     return { [key]: selectedQuote };
