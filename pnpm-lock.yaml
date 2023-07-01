@@ -25,14 +25,7 @@ importers:
         version: 5.1.6
 
   packages/core:
-    dependencies:
-      zod:
-        specifier: ^3.21.4
-        version: 3.21.4
     devDependencies:
-      '@types/node':
-        specifier: ^20.3.2
-        version: 20.3.2
       sst:
         specifier: 2.18.1
         version: 2.18.1
@@ -6129,3 +6122,4 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
+    dev: true
