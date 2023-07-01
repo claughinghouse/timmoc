@@ -16,11 +16,9 @@ export function API({ stack }: StackContext) {
       },
     },
     routes: {
-      // "GET /{id}": "packages/functions/src/id.handler",
+      "GET /{id}": "packages/functions/src/id.handler",
       "GET /json": "packages/functions/src/json.handler",
       // "GET /{id}/json": "packages/functions/src/jsonId.handler",
-      "GET /text": "packages/functions/src/default.handler",
-      // "GET /{id}/text": "packages/functions/src/textId.handler",
       "GET /": "packages/functions/src/default.handler",
       $default: "packages/functions/src/404.handler",
     },
