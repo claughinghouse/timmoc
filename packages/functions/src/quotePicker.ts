@@ -1,7 +1,9 @@
-import { quotes } from "./quotes.js";
+import quotesAsJson from "./quotes.json" assert { type: "json" };
 
-export function randomQuote() {
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const randomQuote = quotes[randomIndex];
-  return randomQuote;
+export function getRandomQuote(): string | null {
+  const quotes: { [key: string]: string } = quotesAsJson;
+  const keys = Object.keys(quotes);
+  const randomKey = keys[Math.floor(Math.random() * keys.length)];
+  const selectedQuote = quotes[randomKey];
+  return selectedQuote;
 }

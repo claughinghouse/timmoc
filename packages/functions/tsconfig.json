@@ -3,6 +3,7 @@
   "compilerOptions": {
     "module": "ESNext",
     "baseUrl": ".",
+    "resolveJsonModule": true,
     "paths": {
       "@timmoc/core/*": ["../core/src/*"],
       "@timmoc/functions/*": ["./src/*"]

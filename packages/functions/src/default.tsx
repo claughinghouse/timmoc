@@ -1,10 +1,10 @@
-import { randomQuote } from "@timmoc/functions/quotePicker.js";
+import { getRandomQuote } from "@timmoc/functions/quotePicker.js";
 import { ApiHandler } from "sst/node/api";
 
 export const handler = ApiHandler(async () => {
-  const response = randomQuote();
+  const response = getRandomQuote();
   return {
     statusCode: 200,
-    body: response,
+    body: JSON.stringify(response).replace(/^"|"$/g, ""),
   };
 });
