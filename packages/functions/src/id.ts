@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { getQuote } from "./quotePicker.js";
+import { getQuote } from "@timmoc/core/quotePicker.js";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {
   const id = event.pathParameters?.id;

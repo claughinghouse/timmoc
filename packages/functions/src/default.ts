@@ -1,4 +1,4 @@
-import { generateRandomQuote } from "@timmoc/functions/quotePicker.js";
+import { generateRandomQuote } from "@timmoc/core/quotePicker.js";
 import { ApiHandler } from "sst/node/api";
 
 export const handler = ApiHandler(async () => {
