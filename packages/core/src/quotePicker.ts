@@ -12,12 +12,11 @@ export function generateRandomQuote() {
   const selectedQuote = quotes[randomKey];
   return { [randomKey]: selectedQuote };
 }
-
 export function getQuote(key: string) {
   const selectedQuote = quotes[key];
   if (key in quotes) {
     return { [key]: selectedQuote };
   } else {
-    return { error: "No quote found for ID: " + key };
+    throw new Error("No quote found for ID: " + key);
   }
 }
