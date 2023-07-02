@@ -1,5 +1,6 @@
 import { SSTConfig } from "sst";
 import { API } from "./stacks/timmocApi.js";
+import { DNS } from "./stacks/dns.js";
 
 export default {
   config(_input) {
@@ -17,6 +18,6 @@ export default {
     if (app.stage !== "prod") {
       app.setDefaultRemovalPolicy("destroy");
     }
-    app.stack(API);
+    app.stack(DNS).stack(API);
   },
 } satisfies SSTConfig;

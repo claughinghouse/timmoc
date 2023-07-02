@@ -1,7 +1,14 @@
-import { Api, StackContext } from "sst/constructs";
+import { Api, StackContext, use } from "sst/constructs";
+import { DNS } from "./dns.js";
 
 export function API({ stack }: StackContext) {
+  const dns = use(DNS);
+
   const api = new Api(stack, "api", {
+    customDomain: {
+      hostedZone: dns.zone,
+      domainName: dns.domain,
+    },
     accessLog: {
       retention: "one_year",
     },
