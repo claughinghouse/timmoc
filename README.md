@@ -28,7 +28,7 @@ This monorepo contains all the code necessary to stand up a [What The Commit](ht
 
 #### For a list of quotes, see [quotes.txt](https://github.com/claughinghouse/timmoc/blob/main/packages/core/lib/quotes.txt) or the [hashedQuotes json version](https://github.com/claughinghouse/timmoc/blob/main/packages/core/src/hashedQuotes.json)
 
-#### I have an alias in my [.gitconfig](https://github.com/claughinghouse/dotfiles/blob/main/dot_gitconfig#L12) that allows me to run `git yolo` and it will commit with a random commit message from this repo. If I feel really adventurous, I can run `git yeet` and it will add all the files, commit them, and push.
+I have an alias in my [.gitconfig](https://github.com/claughinghouse/dotfiles/blob/main/dot_gitconfig#L12) that allows me to run `git yolo` and it will commit with a random commit message from this repo. If I feel really adventurous, I can run `git yeet` and it will add all the files, commit them, and push.
 
 You can add this git alias and be up and running quickly.
 
@@ -57,8 +57,6 @@ Thanks to all the people who donate their time to the [SST Discord community](ht
 ## 📜 Changelog
 
 See my _awful_ [commit history](https://github.com/claughinghouse/timmoc/commits/main)
-
----
 
 ## 🔏 License
 
