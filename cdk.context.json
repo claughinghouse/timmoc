@@ -1,4 +1,8 @@
 {
+  "hosted-zone:account=331093400597:domainName=timmoc.dev:region=us-east-2": {
+    "Id": "/hostedzone/Z0020978SK4K74U6VRBU",
+    "Name": "timmoc.dev."
+  },
   "hosted-zone:account=528914924198:domainName=dev.timmoc.dev:region=us-east-2": {
     "Id": "/hostedzone/Z0862278JEBMVBVPUI98",
     "Name": "dev.timmoc.dev."
