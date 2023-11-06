@@ -6,7 +6,7 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
-    "sst": "2.31.0",
+    "sst": "2.34.7",
     "vitest": "^0.34.6"
   }
 }
