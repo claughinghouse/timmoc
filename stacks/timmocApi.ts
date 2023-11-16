@@ -1,3 +1,5 @@
+import * as cdk from "aws-cdk-lib";
+
 import { Api, StackContext, use } from "sst/constructs";
 import { DNS } from "./dns.js";
 
@@ -15,7 +17,6 @@ export function API({ stack }: StackContext) {
     defaults: {
       function: {
         architecture: "arm_64",
-        runtime: "nodejs18.x",
       },
 
       throttle: {
@@ -30,6 +31,9 @@ export function API({ stack }: StackContext) {
       $default: "packages/functions/src/404.handler",
     },
   });
+  stack
+    .getAllFunctions()
+    .forEach((fn) => cdk.Tags.of(fn).add("baselime:tracing", "true"));
 
   stack.addOutputs({
     ApiEndpoint: api.url,
