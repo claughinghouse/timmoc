@@ -31,6 +31,7 @@ export function API({ stack }: StackContext) {
       $default: "packages/functions/src/404.handler",
     },
   });
+
   stack
     .getAllFunctions()
     .forEach((fn) => cdk.Tags.of(fn).add("baselime:tracing", "true"));
@@ -38,5 +39,6 @@ export function API({ stack }: StackContext) {
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
+
   return api;
 }
