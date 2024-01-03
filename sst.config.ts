@@ -1,6 +1,7 @@
+import { Tags } from "aws-cdk-lib";
 import { SSTConfig } from "sst";
-import { API } from "./stacks/timmocApi.js";
 import { DNS } from "./stacks/dns.js";
+import { API } from "./stacks/timmocApi.js";
 
 export default {
   config(_input) {
@@ -15,6 +16,8 @@ export default {
     };
   },
   stacks(app) {
+    Tags.of(app).add("baselime:tracing", `true`);
+
     if (app.stage !== "prod") {
       app.setDefaultRemovalPolicy("destroy");
     }

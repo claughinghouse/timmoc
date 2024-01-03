@@ -32,10 +32,6 @@ export function API({ stack }: StackContext) {
     },
   });
 
-  stack
-    .getAllFunctions()
-    .forEach((fn) => cdk.Tags.of(fn).add("baselime:tracing", "true"));
-
   stack.addOutputs({
     ApiEndpoint: api.url,
   });

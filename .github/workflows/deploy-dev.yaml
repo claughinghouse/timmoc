@@ -1,0 +1,63 @@
+name: Deploy PR previews to Development
+
+on:
+  # push:
+  #   branches:
+  #     - "!main"
+  # pull_request:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: "Build and Deploy pr-${{ github.event.pull_request.number }} to Development"
+    permissions:
+      id-token: write
+      contents: read
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::528914924198:role/GitHubAction-AssumeRoleWithAction
+          aws-region: us-east-2
+
+      - name: Deploy pr-${{ github.event.pull_request.number }} to AWS Development
+        run: |
+          pnpm sst deploy --stage pr-${{ github.event.pull_request.number }}
+
+      - name: Retreive Deployment URL
+        id: extract-url
+        run: |
+          echo "URL=$(jq -r '..? | .URL | select( . != null )' .sst/outputs.json)" >> $GITHUB_OUTPUT
