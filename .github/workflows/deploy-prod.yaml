@@ -9,7 +9,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: arc-runner-set-timmoc
+    runs-on: ubuntu-latest
     name: "Build and Deploy to Prod"
     permissions:
       id-token: write

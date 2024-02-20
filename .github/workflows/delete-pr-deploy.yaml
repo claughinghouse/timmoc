@@ -11,7 +11,7 @@ on:
         required: true
 jobs:
   deploy:
-    runs-on: arc-runner-set-timmoc
+    runs-on: ubuntu-latest
     name: "Remove pr-${{ github.event.pull_request.number || github.event.inputs.stage_name }} in Development"
     permissions:
       id-token: write
