@@ -44,7 +44,7 @@ jobs:
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::528914924198:role/GitHubAction-AssumeRoleWithAction
+          role-to-assume: arn:aws:iam::331093400597:role/AWS-Credentials-for-GitHub-Actions-Role-Role-qmUnm5NVyP1n
           aws-region: us-east-2
 
       - name: Deploy pr-${{ github.event.pull_request.number }} to AWS Development
