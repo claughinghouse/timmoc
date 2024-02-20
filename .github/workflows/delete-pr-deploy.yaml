@@ -21,7 +21,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
+      - name: unzip
+        run: which unzip && which zip
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
