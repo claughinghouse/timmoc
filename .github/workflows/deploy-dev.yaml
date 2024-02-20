@@ -20,6 +20,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install Bun dependencies
+        run: sudo apt-get install unzip
+
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
