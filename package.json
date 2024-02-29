@@ -2,7 +2,7 @@
   "name": "timmoc",
   "version": "0.0.0",
   "private": true,
-  "type": "module",  
+  "type": "module",
   "scripts": {
     "sst-dev": "sst dev",
     "typecheck": "tsc --noEmit",
