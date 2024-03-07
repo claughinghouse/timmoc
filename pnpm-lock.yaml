@@ -12,37 +12,37 @@ importers:
         specifier: ^16.1.1
         version: 16.1.1
       aws-cdk-lib:
-        specifier: 2.124.0
-        version: 2.124.0(constructs@10.3.0)
+        specifier: 2.131.0
+        version: 2.131.0(constructs@10.3.0)
       constructs:
         specifier: 10.3.0
         version: 10.3.0
       sst:
-        specifier: 2.40.3
-        version: 2.40.3
+        specifier: 2.40.6
+        version: 2.40.6
       typescript:
-        specifier: ^5.3.3
+        specifier: ^5.4.2
         version: 5.4.2
 
   packages/core:
     devDependencies:
       sst:
-        specifier: 2.40.3
-        version: 2.40.3
+        specifier: 2.40.6
+        version: 2.40.6
       vitest:
-        specifier: ^1.2.1
+        specifier: ^1.3.1
         version: 1.3.1
 
   packages/functions:
     devDependencies:
       '@types/aws-lambda':
-        specifier: ^8.10.131
+        specifier: ^8.10.136
         version: 8.10.136
       sst:
-        specifier: 2.40.3
-        version: 2.40.3
+        specifier: 2.40.6
+        version: 2.40.6
       vitest:
-        specifier: ^1.2.1
+        specifier: ^1.3.1
         version: 1.3.1
 
 packages:
@@ -3232,6 +3232,30 @@ packages:
       - table
       - yaml
 
+  /aws-cdk-lib@2.131.0(constructs@10.3.0):
+    resolution: {integrity: sha512-9XLgiTgY+q0S3K93VPeJO0chIN8BZwZ3aSrILvF868Dz+0NTNrD2m5M0xGK5Rw0uoJS+N+DvGaz/2hLAiVqcBw==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/asset-awscli-v1': 2.2.202
+      '@aws-cdk/asset-kubectl-v20': 2.1.2
+      '@aws-cdk/asset-node-proxy-agent-v6': 2.0.1
+      constructs: 10.3.0
+    dev: true
+    bundledDependencies:
+      - '@balena/dockerignore'
+      - case
+      - fs-extra
+      - ignore
+      - jsonschema
+      - minimatch
+      - punycode
+      - semver
+      - table
+      - yaml
+      - mime-types
+
   /aws-crt@1.21.0:
     resolution: {integrity: sha512-5GKAxFm4ttjj5TiVaBkVmOwn6y7KSj9ODyWwCFrBVedS6njH9YLGmdZRVEXn1boz2B5xq4QkPGgf1ypEBR0tvA==}
     requiresBuild: true
@@ -3262,22 +3286,6 @@ packages:
       - bufferutil
       - supports-color
       - utf-8-validate
-    dev: true
-
-  /aws-sdk@2.1541.0:
-    resolution: {integrity: sha512-+xS/Gq/+j/RKb3A6SHXn6tOCaog1O3troklpVxxNaqVNnq+zlwjFderGNzR6S4ftfNG7sKMUP++Znsqte8GMaw==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      buffer: 4.9.2
-      events: 1.1.1
-      ieee754: 1.1.13
-      jmespath: 0.16.0
-      querystring: 0.2.0
-      sax: 1.2.1
-      url: 0.10.3
-      util: 0.12.5
-      uuid: 8.0.0
-      xml2js: 0.5.0
     dev: true
 
   /aws-sdk@2.1560.0:
@@ -4588,8 +4596,8 @@ packages:
     engines: {node: '>= 0.6.0'}
     dev: true
 
-  /jose@4.15.4:
-    resolution: {integrity: sha512-W+oqK4H+r5sITxfxpSU+MMdr/YSWGvgZMQDIsNoBDGGy4i7GBPTtvFKibQzW06n3U3TqHjhvBJsirShsEJ6eeQ==}
+  /jose@4.15.5:
+    resolution: {integrity: sha512-jc7BFxgKPKi94uOvEmzlSWFFe2+vASyXaKUpdQKatWAESU2MWjDfFf0fdfc83CDKcA5QecabZeNLyfhe3yKNkg==}
     dev: true
 
   /js-sdsl@4.3.0:
@@ -5068,7 +5076,7 @@ packages:
   /openid-client@5.6.4:
     resolution: {integrity: sha512-T1h3B10BRPKfcObdBklX639tVz+xh34O7GjofqrqiAQdm7eHsQ00ih18x6wuJ/E6FxdtS2u3FmUGPDeEcMwzNA==}
     dependencies:
-      jose: 4.15.4
+      jose: 4.15.5
       lru-cache: 6.0.0
       object-hash: 2.2.0
       oidc-token-hash: 5.0.3
@@ -5575,8 +5583,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /sst@2.40.3:
-    resolution: {integrity: sha512-Lwjw8DpIE57fG1Rra0h/Mp7ykwDVsFe/Y1M/UmTFjpH9EunxuDka2miaI24msLYuov3XNaIFRbdeKLAdigMBXg==}
+  /sst@2.40.6:
+    resolution: {integrity: sha512-cpwiOgzOx9cA00qDJ/FO3H9NrMZkK/6lFwERydSuvT3EuDgN9yZ68brCdllWv9gOsvya4JlWOhPQ5FpofrSdEA==}
     hasBin: true
     peerDependencies:
       '@sls-next/lambda-at-edge': ^3.7.0
@@ -5614,7 +5622,7 @@ packages:
       adm-zip: 0.5.10
       aws-cdk-lib: 2.124.0(constructs@10.3.0)
       aws-iot-device-sdk: 2.2.13
-      aws-sdk: 2.1541.0
+      aws-sdk: 2.1560.0
       builtin-modules: 3.2.0
       cdk-assets: 2.124.0
       chalk: 5.3.0
@@ -6133,6 +6141,7 @@ packages:
   /which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
+    hasBin: true
     dependencies:
       isexe: 2.0.0
     dev: true
@@ -6215,14 +6224,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-    dev: true
-
-  /xml2js@0.5.0:
-    resolution: {integrity: sha512-drPFnkQJik/O+uPKpqSgr22mpuFHqKdbS835iAQrUC73L2F5WkboIRd63ai/2Yg6I1jzifPFKH2NTK+cfglkIA==}
-    engines: {node: '>=4.0.0'}
-    dependencies:
-      sax: 1.2.1
-      xmlbuilder: 11.0.1
     dev: true
 
   /xml2js@0.6.2:
