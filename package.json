@@ -16,7 +16,7 @@
     "constructs": "10.3.0",
     "sst": "2.41.2",
     "typescript": "^5.4.2",
-    "wrangler": "^3.34.2"
+    "wrangler": "^3.35.0"
   },
   "workspaces": [
     "packages/*"
