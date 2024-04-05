@@ -40,7 +40,7 @@ importers:
     devDependencies:
       '@types/aws-lambda':
         specifier: ^8.10.136
-        version: 8.10.136
+        version: 8.10.137
       sst:
         specifier: 2.41.2
         version: 2.41.2(@aws-sdk/credential-provider-node@3.549.0)
@@ -3632,8 +3632,8 @@ packages:
     resolution: {integrity: sha512-9nTOUBn+EMKO6rtSZJk+DcqsfgtlERGT9XPJ5PRj/HNENPCBY1yu/JEj5wT6GLtbCLBO2k46SeXDaY0pjMqypw==}
     dev: true
 
-  /@types/aws-lambda@8.10.136:
-    resolution: {integrity: sha512-cmmgqxdVGhxYK9lZMYYXYRJk6twBo53ivtXjIUEFZxfxe4TkZTZBK3RRWrY2HjJcUIix0mdifn15yjOAat5lTA==}
+  /@types/aws-lambda@8.10.137:
+    resolution: {integrity: sha512-YNFwzVarXAOXkjuFxONyDw1vgRNzyH8AuyN19s0bM+ChSu/bzxb5XPxYFLXoqoM+tvgzwR3k7fXcEOW125yJxg==}
     dev: true
 
   /@types/estree@1.0.5:
