@@ -2,23 +2,19 @@
   "name": "timmoc",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
-    "sst-dev": "sst dev",
-    "typecheck": "tsc --noEmit",
-    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-    "sso": "aws sso login --profile development"
+    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
+    "sso": "aws sso login --profile development",
+    "sst-dev": "sst dev",
+    "typecheck": "tsc --noEmit"
   },
-  "devDependencies": {
-    "@tsconfig/node16": "^16.1.1",
-    "aws-cdk-lib": "2.132.1",
-    "constructs": "10.3.0",
-    "sst": "2.41.2",
-    "typescript": "^5.4.2",
-    "wrangler": "^3.35.0"
-  },
+  "type": "module",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "hono": "^4.2.3"
+  }
 }
+

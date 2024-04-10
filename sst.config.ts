@@ -1,5 +1,7 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
+import { weakImport } from "sst/constructs";
+
 export default $config({
   app(input) {
     return {
@@ -9,12 +11,19 @@ export default $config({
     };
   },
   async run() {
-    const worker = new sst.cloudflare.Worker("Timmoc", {
+    const domain =
+      {
+        production: "timmoc.dev",
+        dev: "timmoc.laughinghou.se",
+      }[$app.stage] || $app.stage + "timmoc.laughinghou.se";
+
+    const timmocWorker = new sst.cloudflare.Worker("TimmocWorker", {
       handler: "packages/functions/src/index.ts",
       url: true,
+      domain: domain,
     });
     return {
-      url: worker.url,
+      url: timmocWorker.url,
     };
   },
 });
