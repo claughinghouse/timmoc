@@ -1,7 +1,5 @@
 /// <reference path="./.sst/platform/config.d.ts" />
 
-import { weakImport } from "sst/constructs";
-
 export default $config({
   app(input) {
     return {
@@ -14,8 +12,8 @@ export default $config({
     const domain =
       {
         production: "timmoc.dev",
-        dev: "timmoc.laughinghou.se",
-      }[$app.stage] || $app.stage + "timmoc.laughinghou.se";
+        dev: "dev.timmoc.dev",
+      }[$app.stage] || $app.stage + "dev.timmoc.dev";
 
     const timmocWorker = new sst.cloudflare.Worker("TimmocWorker", {
       handler: "packages/functions/src/index.ts",
