@@ -1,4 +1,6 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
-  "exclude": ["packages"]
+  "compilerOptions": {
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types"]
+  }
 }
