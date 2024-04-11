@@ -1,12 +1,13 @@
 {
   "name": "@timmoc/core",
   "version": "0.0.0",
-  "scripts": {
-    "test": "sst bind vitest",
-    "typecheck": "tsc -noEmit"
-  },
   "devDependencies": {
-    "vitest": "^1.4.0"
+    "drizzle-kit": "^0.20.14",
+    "vitest": "^1.4.0",
+    "@cloudflare/workers-types": "^4.20240405.0"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.8",
+    "sst": "^3.0.4"
   }
 }
-
