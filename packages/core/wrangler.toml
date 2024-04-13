@@ -12,10 +12,13 @@ compatibility_date = "2023-12-01"
 # binding = "MY_BUCKET"
 # bucket_name = "my-bucket"
 
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "database-Name"
-# database_id = "database-id"
+# TODO: Update or remove this once SST has implemented D1 full support
 
+[[d1_databases]]
+binding = "DB"
+database_name = "timmoc-cody-timmocdbdatabase"
+database_id = "2bd1d81d-2000-407d-b490-ffd2818c3243"
+# TODO: remove the migrations dir
+migrations_dir = "migrations"
 # [ai]
 # binding = "AI"

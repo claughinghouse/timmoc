@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { Resource } from "sst";
 
 const app = new Hono();
 
@@ -6,8 +7,12 @@ const app = new Hono();
 //   return c.text("Hello Hono!");
 // });
 
-app.get("/", (c) => {
-  return c.json({ c });
+app.get("/", async (c) => {
+  const quote = await Resource.TimmocDb.prepare(
+    "SELECT quote_text FROM quotes ORDER BY RANDOM() LIMIT 1",
+  ).run();
+  console.log(quote);
+  return c.json(quote);
 });
 
 app.notFound((c) => {

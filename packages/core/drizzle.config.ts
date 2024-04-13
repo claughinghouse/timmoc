@@ -9,6 +9,7 @@ export default defineConfig({
   driver: "d1",
   dbCredentials: {
     wranglerConfigPath: "wrangler.toml",
-    dbName: Resource.TimmocDb,
+    // TODO: Move this to Resource.TimmocDb once supported
+    dbName: "timmoc-cody-timmocdbdatabase",
   },
 });
