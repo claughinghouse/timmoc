@@ -1,6 +1,10 @@
 {
   "name": "@timmoc/core",
   "version": "0.0.0",
+  "scripts": {
+    "migrate:generate": "drizzle-kit generate:sqlite",
+    "migrate:apply:remote": "wrangler d1 migrations apply timmoc-cody-timmocdbdatabase --remote"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
     "drizzle-kit": "^0.20.14",

@@ -11,8 +11,9 @@ app.get("/", async (c) => {
   const quote = await Resource.TimmocDb.prepare(
     "SELECT quote_text FROM quotes ORDER BY RANDOM() LIMIT 1",
   ).run();
-  console.log(quote);
-  return c.json(quote);
+  console.log(quote.results[0].quote_text);
+
+  return c.text(quote.results[0].quote_text);
 });
 
 app.notFound((c) => {

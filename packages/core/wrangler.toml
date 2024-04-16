@@ -17,7 +17,7 @@ compatibility_date = "2023-12-01"
 [[d1_databases]]
 binding = "DB"
 database_name = "timmoc-cody-timmocdbdatabase"
-database_id = "2bd1d81d-2000-407d-b490-ffd2818c3243"
+database_id = "89361f7b-d98e-4740-887f-624f62696a0f"
 # TODO: remove the migrations dir
 migrations_dir = "migrations"
 # [ai]
