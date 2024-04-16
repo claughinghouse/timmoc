@@ -4,7 +4,7 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
     "drizzle-kit": "^0.20.14",
-    "vitest": "^1.4.0",
+    "vitest": "^1.5.0",
     "wrangler": "^3.50.0"
   },
   "dependencies": {
