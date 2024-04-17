@@ -12,7 +12,9 @@
     "wrangler": "^3.50.0"
   },
   "dependencies": {
+    "@hono/valibot-validator": "^0.2.2",
     "drizzle-orm": "^0.30.8",
-    "sst": "^3.0.4"
+    "sst": "^3.0.4",
+    "valibot": "^0.30.0"
   }
 }
