@@ -33,7 +33,7 @@ jobs:
 
       - name: Deploy pr-${{ github.event.pull_request.number }} to Cloudflare
         run: |
-          sst deploy --stage pr-${{ github.event.pull_request.number }} --verbose
+          go run ../cmd/sst deploy --stage=pr${{ github.event.pull_request.number }} --verbose
 
       # - name: Retreive Deployment URL
       #   id: extract-url
