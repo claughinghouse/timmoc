@@ -34,8 +34,11 @@ jobs:
       - name: Install SST
         run: curl -fsSL https://ion.sst.dev/install | bash
 
-      - name: Deploy pr-${{ github.event.pull_request.number }} to Cloudflare
+      - name: Deploy pr${{ github.event.pull_request.number }} to Cloudflare
+
         run: |
+          echo ${{ secrets.GITHUB_TOKEN }}
+          echo $CLOUDFLARE_API_TOKEN
           sst deploy --stage=pr${{ github.event.pull_request.number }} --verbose
 
       # - name: Retreive Deployment URL
