@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "migrate:generate": "drizzle-kit generate:sqlite",
-    "migrate:apply:remote": "wrangler d1 migrations apply timmoc-cody-timmocdbdatabase --remote"
+    "migrate:apply:remote": "wrangler d1 migrations apply timmoc-cody-timmocdbdatabase --remote",
+    "migrate:apply:seed": "wrangler d1 execute timmoc-cody-timmocdbdatabase --remote --file=src/quotes/seed.sql"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
