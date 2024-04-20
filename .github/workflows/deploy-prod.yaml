@@ -36,8 +36,3 @@ jobs:
           NO_BUN: true
         run: |
           sst deploy --stage=production --verbose
-
-      - name: Retreive Deployment URL
-        id: extract-url
-        run: |
-          echo "URL=$(jq -r '..? | .URL | select( . != null )' .sst/outputs.json)" >> $GITHUB_OUTPUT
