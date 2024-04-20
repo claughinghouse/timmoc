@@ -31,6 +31,7 @@ jobs:
         run: curl -fsSL https://ion.sst.dev/install | bash
 
       - name: Deploy pr${{ github.event.pull_request.number }} to Cloudflare
-        env: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           sst deploy --stage=pr${{ github.event.pull_request.number }} --verbose
