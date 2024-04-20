@@ -7,12 +7,13 @@ on:
   workflow_dispatch:
     inputs:
       stage_name:
-        description: "Stage Name (or PR number)"
+        description: "Stage name to remove"
         required: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: "Remove pr-${{ github.event.pull_request.number || github.event.inputs.stage_name }} in Development"
+    name: "Remove stage ${{ github.event.pull_request.number }} in Development"
     permissions:
       id-token: write
       contents: read
@@ -22,31 +23,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Bun dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - uses: actions/cache@v4
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.bun }}-bun-
-
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: bun install
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::528914924198:role/AWS-Credentials-for-GitHub-Actions-Role-KtfakMUm0ThA
-          aws-region: us-east-2
+      - name: Install SST
+        run: curl -fsSL https://ion.sst.dev/install | bash
 
-      - name: Deploy pr-${{ github.event.pull_request.number }} to AWS Development
+      - name: Remove ${{ github.event.pull_request.number || github.event.inputs.stage_name }} from Cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          NO_BUN: true
         run: |
-          bun sst remove --stage pr-${{ github.event.pull_request.number }}
+          sst remove --stage=${{ github.event.pull_request.number || github.event.inputs.stage_name }} --verbose
