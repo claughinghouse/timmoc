@@ -24,10 +24,6 @@ jobs:
         with:
           bun-version: latest
 
-      # - uses: actions/setup-go@v5
-      #   with:
-      #     go-version: "stable"
-
       - name: Install dependencies
         run: bun install
 
@@ -38,8 +34,3 @@ jobs:
         run: |
           echo "CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }}" >> $GITHUB_ENV
           sst deploy --stage=pr${{ github.event.pull_request.number }} --verbose
-
-      # - name: Retreive Deployment URL
-      #   id: extract-url
-      #   run: |
-      #     echo "URL=$(jq -r '..? | .URL | select( . != null )' .sst/outputs.json)" >> $GITHUB_OUTPUT
