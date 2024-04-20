@@ -1,26 +1,30 @@
-import { Tags } from "aws-cdk-lib";
-import { SSTConfig } from "sst";
-import { DNS } from "./stacks/dns.js";
-import { API } from "./stacks/timmocApi.js";
+/// <reference path="./.sst/platform/config.d.ts" />
 
-export default {
-  config(_input) {
-    const profile: Record<string, string> = {
-      dev: "development",
-      prod: "prod",
-    };
+export default $config({
+  app(input) {
     return {
       name: "timmoc",
-      region: "us-east-2",
-      profile: profile[_input.stage || ""] || profile.dev,
+      removal: input?.stage === "production" ? "retain" : "remove",
+      home: "cloudflare",
     };
   },
-  stacks(app) {
-    Tags.of(app).add("baselime:tracing", `true`);
+  async run() {
+    const domain =
+      {
+        production: "timmoc.dev",
+        dev: "dev.timmoc.dev",
+      }[$app.stage] || $app.stage + ".dev.timmoc.dev";
 
-    if (app.stage !== "prod") {
-      app.setDefaultRemovalPolicy("destroy");
-    }
-    app.stack(DNS).stack(API);
+    const timmocDb = new sst.cloudflare.D1("TimmocDb");
+
+    const timmocWorker = new sst.cloudflare.Worker("TimmocWorker", {
+      handler: "packages/functions/src/index.ts",
+      url: true,
+      domain: domain,
+      link: [timmocDb],
+    });
+    return {
+      url: timmocWorker.url,
+    };
   },
-} satisfies SSTConfig;
+});

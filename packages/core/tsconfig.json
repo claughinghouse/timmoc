@@ -1,7 +1,15 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "resolveJsonModule": true
-  }
+    "target": "esnext",
+    "alwaysStrict": true,
+    "strict": true,
+    "noEmitOnError": true,
+    "moduleResolution": "node",
+    "preserveConstEnums": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "noEmit": true,
+    "types": ["@cloudflare/workers-types"]
+  },
+  "include": ["src"]
 }

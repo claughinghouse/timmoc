@@ -1,11 +1,24 @@
+// {
+//   "compilerOptions": {
+//     "target": "ESNext",
+//     "module": "ESNext",
+//     "moduleResolution": "Bundler",
+//     "strict": true,
+//     "lib": [
+//       "ESNext"
+//     ],
+//     "types": [
+//       "@cloudflare/workers-types"
+//     ],
+//     "jsx": "react-jsx",
+//     "jsxImportSource": "hono/jsx"
+//   },
+// }
+
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "baseUrl": ".",
-    "paths": {
-      "@timmoc/core/*": ["../core/src/*"],
-      "@timmoc/functions/*": ["./src/*"]
-    }
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types"]
   }
 }
+

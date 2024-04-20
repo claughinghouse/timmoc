@@ -2,11 +2,6 @@
 
 # [timmoc.dev](https://timmoc.dev)
 
-## Deploy Status
-
-[![Seed Status](https://api.seed.run/timmoc/timmoc/stages/dev/build_badge)](https://console.seed.run/timmoc/timmoc)&nbsp;&nbsp;&nbsp;
-[![Seed Status](https://api.seed.run/timmoc/timmoc/stages/prod/build_badge)](https://console.seed.run/timmoc/timmoc)
-
 </div>
 
 ---
