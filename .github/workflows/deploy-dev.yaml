@@ -20,35 +20,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip
-
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
 
-      - uses: actions/cache@v4
+      - uses: actions/setup-go@v5
         with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-${{ matrix.bun }}-bun-${{ hashFiles('**/bun.lockb') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ matrix.bun }}-bun-
+          go-version: "stable"
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::528914924198:role/AWS-Credentials-for-GitHub-Actions-Role-KtfakMUm0ThA
-          aws-region: us-east-2
-
-      - name: Deploy pr-${{ github.event.pull_request.number }} to AWS Development
+      - name: Deploy pr-${{ github.event.pull_request.number }} to Cloudflare
         run: |
-          bun sst deploy --stage pr-${{ github.event.pull_request.number }}
+          sst deploy --stage pr-${{ github.event.pull_request.number }} --verbose
 
-      - name: Retreive Deployment URL
-        id: extract-url
-        run: |
-          echo "URL=$(jq -r '..? | .URL | select( . != null )' .sst/outputs.json)" >> $GITHUB_OUTPUT
+      # - name: Retreive Deployment URL
+      #   id: extract-url
+      #   run: |
+      #     echo "URL=$(jq -r '..? | .URL | select( . != null )' .sst/outputs.json)" >> $GITHUB_OUTPUT
