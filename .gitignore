@@ -21,3 +21,6 @@ dist
 package-lock.json
 yarn.lock
 pnpm-lock.yam
+
+# Drizzle files
+migrations/

@@ -2,9 +2,13 @@
   "name": "@timmoc/core",
   "version": "0.0.0",
   "scripts": {
-    "migrate:generate": "drizzle-kit generate:sqlite",
-    "migrate:apply:remote": "wrangler d1 migrations apply timmoc-cody-timmocdbdatabase --remote",
-    "migrate:apply:seed": "wrangler d1 execute timmoc-cody-timmocdbdatabase --remote --file=src/quotes/seed.sql"
+    "dev:migrate:generate": "drizzle-kit generate:sqlite",
+    "dev:migrate:apply:remote": "wrangler d1 migrations apply timmoc-cody-timmocdbdatabase --remote",
+    "dev:migrate:apply:seed": "wrangler d1 execute timmoc-cody-timmocdbdatabase --remote --file=src/quotes/seed.sql",
+    "prod:migrate:generate": "drizzle-kit generate:sqlite",
+    "prod:migrate:updatemetadata": "drizzle-kit push:sqlite",
+    "prod:migrate:apply:remote": "wrangler d1 migrations apply timmoc-production-timmocdbdatabase --remote",
+    "prod:migrate:apply:seed": "wrangler d1 execute timmoc-production-timmocdbdatabase --remote --file=lib/seed.sql"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240405.0",
