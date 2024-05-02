@@ -36,4 +36,3 @@ jobs:
           NO_BUN: true
         run: |
           sst deploy --stage=pr${{ github.event.pull_request.number }} --verbose
-
