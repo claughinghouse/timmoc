@@ -1,4 +1,4 @@
-import { text, sqliteTable } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const quotes = sqliteTable("quotes", {
   id: text("id").notNull(),

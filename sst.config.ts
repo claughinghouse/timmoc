@@ -13,7 +13,7 @@ export default $config({
       {
         production: "timmoc.dev",
         dev: "dev.timmoc.dev",
-      }[$app.stage] || $app.stage + ".dev.timmoc.dev";
+      }[$app.stage] || `${$app.stage}.dev.timmoc.dev`;
 
     const timmocDb = new sst.cloudflare.D1("TimmocDb");
 

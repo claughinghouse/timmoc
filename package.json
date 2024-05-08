@@ -3,16 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
-    "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
-    "sso": "aws sso login --profile development",
-    "sst-dev": "sst dev",
-    "typecheck": "tsc --noEmit"
+    "lint": "biome check .",
+    "lint:fix": "biome check --apply .",
+    "update:all": "bunx taze -r -w"
   },
   "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "dependencies": {
     "hono": "^4.2.3"
   }

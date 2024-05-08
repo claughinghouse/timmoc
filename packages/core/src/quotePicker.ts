@@ -16,7 +16,6 @@ export function getQuote(key: string) {
   const selectedQuote = quotes[key];
   if (key in quotes) {
     return { [key]: selectedQuote };
-  } else {
-    throw new Error("No quote found for ID: " + key);
   }
+  throw new Error(`No quote found for ID: ${key}`);
 }
