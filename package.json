@@ -10,6 +10,6 @@
   "type": "module",
   "workspaces": ["packages/*"],
   "dependencies": {
-    "hono": "^4.2.3"
+    "hono": "^4.3.3"
   }
 }

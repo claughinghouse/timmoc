@@ -10,15 +10,15 @@
     "prod:migrate:apply:seed": "wrangler d1 execute timmoc-production-timmocdbdatabase --remote --file=lib/seed.sql"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240405.0",
-    "drizzle-kit": "^0.20.14",
-    "vitest": "^1.5.0",
-    "wrangler": "^3.50.0"
+    "@cloudflare/workers-types": "^4.20240502.0",
+    "drizzle-kit": "^0.20.18",
+    "vitest": "^1.6.0",
+    "wrangler": "^3.53.1"
   },
   "dependencies": {
-    "@hono/valibot-validator": "^0.2.2",
-    "drizzle-orm": "^0.30.8",
-    "sst": "^3.0.4",
+    "@hono/valibot-validator": "^0.2.4",
+    "drizzle-orm": "^0.30.10",
+    "sst": "^3.0.14",
     "valibot": "^0.30.0"
   }
 }
