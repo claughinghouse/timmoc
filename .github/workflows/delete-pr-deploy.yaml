@@ -13,7 +13,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: "Remove stage ${{ github.event.pull_request.number }} in Development"
+    name: "Remove stage pr${{ github.event.pull_request.number || github.event.inputs.stage_name }} in Development"
     permissions:
       id-token: write
       contents: read
@@ -33,9 +33,9 @@ jobs:
       - name: Install SST
         run: curl -fsSL https://ion.sst.dev/install | bash
 
-      - name: Remove ${{ github.event.pull_request.number || github.event.inputs.stage_name }} from Cloudflare
+      - name: Remove pr${{ github.event.pull_request.number || github.event.inputs.stage_name }} from Cloudflare
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           NO_BUN: true
         run: |
-          sst remove --stage=${{ github.event.pull_request.number || github.event.inputs.stage_name }} --verbose
+          sst remove --stage=pr${{ github.event.pull_request.number || github.event.inputs.stage_name }} --verbose
