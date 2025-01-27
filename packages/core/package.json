@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@hono/valibot-validator": "^0.5.0",
-    "drizzle-orm": "^0.38.0",
+    "drizzle-orm": "^0.39.0",
     "sst": "^3.0.14",
     "valibot": "^0.42.0"
   }
