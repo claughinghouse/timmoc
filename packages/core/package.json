@@ -13,7 +13,7 @@
     "@cloudflare/workers-types": "^4.20240502.0",
     "drizzle-kit": "^0.31.0",
     "vitest": "^2.0.0",
-    "wrangler": "^3.53.1"
+    "wrangler": "^4.0.0"
   },
   "dependencies": {
     "@hono/valibot-validator": "^0.5.0",
