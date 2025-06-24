@@ -19,6 +19,6 @@
     "@hono/valibot-validator": "^0.5.0",
     "drizzle-orm": "^0.44.0",
     "sst": "^3.0.14",
-    "valibot": "^0.42.0"
+    "valibot": "^1.0.0"
   }
 }
