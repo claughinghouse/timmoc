@@ -1,38 +1,38 @@
-name: Deploy to Prod
-
-on:
-  push:
-    branches:
-      - main
-  # pull_request:
-  workflow_dispatch:
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    name: "Deploy to Prod"
-    permissions:
-      id-token: write
-      contents: read
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-
-    steps:
-      - uses: actions/checkout@v6
-
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
-
-      - name: Install dependencies
-        run: bun install
-
-      - name: Install SST
-        run: curl -fsSL https://ion.sst.dev/install | bash
-
-      - name: Deploy Prod to Cloudflare
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          NO_BUN: true
-        run: |
-          sst deploy --stage=production --verbose
+# name: Deploy to Prod
+#
+# on:
+#   push:
+#     branches:
+#       - main
+#   # pull_request:
+#   workflow_dispatch:
+#
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     name: "Deploy to Prod"
+#     permissions:
+#       id-token: write
+#       contents: read
+#     concurrency:
+#       group: ${{ github.workflow }}-${{ github.ref }}
+#
+#     steps:
+#       - uses: actions/checkout@v6
+#
+#       - uses: oven-sh/setup-bun@v2
+#         with:
+#           bun-version: latest
+#
+#       - name: Install dependencies
+#         run: bun install
+#
+#       - name: Install SST
+#         run: curl -fsSL https://ion.sst.dev/install | bash
+#
+#       - name: Deploy Prod to Cloudflare
+#         env:
+#           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+#           NO_BUN: true
+#         run: |
+#           sst deploy --stage=production --verbose
