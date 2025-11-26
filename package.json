@@ -6,17 +6,18 @@
   "scripts": {
     "lint": "biome check .",
     "lint:fix": "biome check --write --unsafe",
-    "update:all": "bunx npm-check-updates -ui -ws",
+    "update:all": "bunx npm-check-updates -ui",
     "cf-typegen": "wrangler types",
     "check": "tsc && wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
-    "start": "wrangler dev"
+    "start": "wrangler dev",
+    "generate:ci": "bun i --package-lock-only"
   },
   "type": "module",
   "dependencies": {
     "@std/ulid": "npm:@jsr/std__ulid",
-    "wrangler": "4.50.0"
+    "wrangler": "4.51.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20251126.0"
