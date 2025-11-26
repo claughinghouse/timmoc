@@ -9,26 +9,5 @@
   },
   "placement": {
     "mode": "smart"
-  },
-  "durable_objects": {
-    "bindings": [
-      {
-        "name": "TIMMOC_DURABLE_OBJECT",
-        "class_name": "TimmocDurableObject"
-      }
-    ]
-  },
-  "rules": [
-    {
-      "fallthrough": true,
-      "globs": ["**/*.sql"],
-      "type": "Text"
-    }
-  ],
-  "migrations": [
-    {
-      "tag": "v1",
-      "new_sqlite_classes": ["TimmocDurableObject"]
-    }
-  ]
+  }
 }
