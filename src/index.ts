@@ -52,7 +52,7 @@ export default {
    * @param ctx - The execution context of the Worker
    * @returns The response to be sent back to the client
    */
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(_request: Request, env: Env): Promise<Response> {
     const id: DurableObjectId = env.TIMMOC_DURABLE_OBJECT.idFromName(
       "TimmocDurableObject",
     );
