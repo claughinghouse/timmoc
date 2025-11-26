@@ -53,8 +53,9 @@ export default {
    * @returns The response to be sent back to the client
    */
   async fetch(request: Request, env: Env): Promise<Response> {
-    const id: DurableObjectId =
-      env.TIMMOC_DURABLE_OBJECT.idFromName("durable-object");
+    const id: DurableObjectId = env.TIMMOC_DURABLE_OBJECT.idFromName(
+      "TimmocDurableObject",
+    );
     const stub = env.TIMMOC_DURABLE_OBJECT.get(id);
 
     // Option A - Maximum performance.
