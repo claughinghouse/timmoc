@@ -9,5 +9,11 @@
   },
   "placement": {
     "mode": "smart"
-  }
+  },
+  "routes": [
+    {
+      "pattern": "timmoc.dev",
+      "custom_domain": true
+    }
+  ]
 }
