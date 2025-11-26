@@ -1,15 +1,25 @@
 {
+  "$schema": "https://www.schemastore.org/package.json",
   "name": "timmoc",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "lint": "biome check .",
-    "lint:fix": "biome check --apply .",
-    "update:all": "bunx taze -r -w"
+    "lint:fix": "biome check --write --unsafe",
+    "update:all": "bunx npm-check-updates -ui",
+    "cf-typegen": "wrangler types",
+    "check": "tsc && wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "start": "wrangler dev",
+    "generate:ci": "bun i --package-lock-only"
   },
   "type": "module",
-  "workspaces": ["packages/*"],
   "dependencies": {
-    "hono": "^4.3.3"
+    "@std/ulid": "npm:@jsr/std__ulid",
+    "wrangler": "4.51.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "4.20251126.0"
   }
 }
