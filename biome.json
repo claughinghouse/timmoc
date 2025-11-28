@@ -18,6 +18,11 @@
     "defaultBranch": "main"
   },
   "files": {
-    "includes": ["**", "!!**/dist", "!!worker-configuration.d.ts"]
+    "includes": [
+      "**",
+      "!!**/dist",
+      "!!worker-configuration.d.ts",
+      "!!quotes.ts"
+    ]
   }
 }
