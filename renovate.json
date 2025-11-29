@@ -7,9 +7,6 @@
     ":enablePreCommit",
     ":rebaseStalePrs"
   ],
-  "platform": "github",
-  "username": "midnight-bot-6658[bot]",
-  "repositories": ["claughinghouse/timmoc"],
   "gitAuthor": "midnight-bot <182125+midnight-bot[bot]@users.noreply.github.com>",
   "dependencyDashboardTitle": "Renovate Dashboard 🤖",
   "suppressNotifications": ["prIgnoreNotification"],
