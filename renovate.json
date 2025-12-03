@@ -14,12 +14,8 @@
   "commitBodyTable": true,
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "matchUpdateTypes": ["minor"],
       "automerge": true
-    },
-    {
-      "matchPackageNames": ["aws-cdk-lib", "constructs", "sst"],
-      "enabled": false
     }
   ],
   "platformAutomerge": true
