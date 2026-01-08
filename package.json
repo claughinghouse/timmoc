@@ -17,7 +17,7 @@
   "type": "module",
   "dependencies": {
     "@std/ulid": "npm:@jsr/std__ulid",
-    "wrangler": "4.57.0"
+    "wrangler": "4.58.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "4.20260108.0"
