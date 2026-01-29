@@ -466,7 +466,6 @@ export default [
   "fixed errors in the previous commit",
   "fixed mistaken bug",
   "fixed some minor stuff, might need some additional work.",
-  "fixed the israeli-palestinian conflict",
   "fixes",
   "foo",
   "forgot a contact page woops haha",
