@@ -3,23 +3,30 @@
   "name": "timmoc",
   "version": "1.0.0",
   "private": true,
-  "scripts": {
-    "lint": "biome check .",
-    "lint:fix": "biome check --write --unsafe",
-    "update:all": "bunx npm-check-updates -ui",
-    "cf-typegen": "wrangler types",
-    "check": "tsc && wrangler deploy --dry-run",
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev",
-    "start": "wrangler dev",
-    "generate:ci": "bun i --package-lock-only"
-  },
   "type": "module",
+  "scripts": {
+    "lint": "vp lint --deny-warnings",
+    "lint:fix": "vp check --fix && aube run lint",
+    "check": "vp check && aube run lint",
+    "auth": "alchemy profile edit --add Cloudflare",
+    "deploy": "alchemy deploy --stage production --adopt",
+    "plan": "alchemy plan --stage production",
+    "dev": "alchemy dev",
+    "start": "alchemy dev"
+  },
   "dependencies": {
-    "@std/ulid": "npm:@jsr/std__ulid",
-    "wrangler": "4.151.0"
+    "@effect/platform-node": "4.0.5",
+    "alchemy": "2.0.0-beta.83",
+    "effect": "4.0.5"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "5.20261021.1"
-  }
+    "@cloudflare/workers-types": "5.20261021.1",
+    "@types/node": "24.10.0",
+    "typescript": "6.0.3",
+    "vite-plus": "1.3.0"
+  },
+  "engines": {
+    "node": ">=24.11.1"
+  },
+  "packageManager": "aube@2.8.1"
 }

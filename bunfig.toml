@@ -1,6 +1,0 @@
-[install]
-saveTextLockfile = true
-exact = true
-
-[install.scopes]
-"@jsr" = "https://npm.jsr.io"

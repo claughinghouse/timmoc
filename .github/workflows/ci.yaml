@@ -1,0 +1,46 @@
+name: CI and deployment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/aube-action@v1
+        with:
+          version: "2.8.1"
+          cache: true
+          run-install: true
+      - name: Check types, formatting, and lint
+        run: aube run check
+
+  deploy:
+    needs: quality
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: timmoc-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: jdx/aube-action@v1
+        with:
+          version: "2.8.1"
+          cache: true
+          run-install: true
+      - name: Deploy production
+        run: aube run deploy -- --yes --no-input
+        env:
+          CI: "true"
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
