@@ -1,4 +1,5 @@
 import * as Cloudflare from "alchemy/Cloudflare";
+import * as Output from "alchemy/Output";
 import * as Stage from "alchemy/Stage";
 import * as Effect from "effect/Effect";
 import * as Random from "effect/Random";
@@ -10,8 +11,12 @@ export default Cloudflare.Worker(
     main: import.meta.url,
     name: Stage.Stage.pipe(
       Effect.map((stage) => (stage === "production" ? "timmoc" : `timmoc-${stage}`)),
+      Output.fromEffect,
     ),
-    domain: Stage.Stage.pipe(Effect.map((stage) => (stage === "production" ? "timmoc.dev" : null))),
+    domain: Stage.Stage.pipe(
+      Effect.map((stage) => (stage === "production" ? "timmoc.dev" : null)),
+      Output.fromEffect,
+    ),
     compatibility: { date: "2026-10-09", flags: ["nodejs_compat"] },
     workersDev: { enabled: true, previewsEnabled: true },
     placement: { mode: "smart" },
