@@ -9,12 +9,13 @@
     "lint:fix": "vp check --fix && aube run lint",
     "check": "vp check && aube run lint",
     "auth": "alchemy profile edit --add Cloudflare",
-    "deploy": "alchemy deploy --stage production",
+    "deploy": "alchemy deploy --stage production --adopt",
     "plan": "alchemy plan --stage production",
     "dev": "alchemy dev",
     "start": "alchemy dev"
   },
   "dependencies": {
+    "@effect/platform-node": "4.0.5",
     "alchemy": "2.0.0-beta.83",
     "effect": "4.0.5"
   },
