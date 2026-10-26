@@ -1,5 +1,5 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
-
+.pi/
 # Logs
 
 logs
@@ -180,10 +180,10 @@ sst-env.d.ts
 node_modules
 dist
 .wrangler
+.alchemy/
 .dev.vars
 
 # Change them to your taste:
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
-bun.lockb

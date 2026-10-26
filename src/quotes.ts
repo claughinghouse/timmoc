@@ -1,3 +1,4 @@
+/** The non-empty catalog of commit messages served by timmoc. */
 export default [
   " ¯_(ツ)_/¯",
   "#GrammarNazi",
@@ -613,4 +614,4 @@ export default [
   "yo recipes",
   "yolo push",
   "you do wanna make me cry and i wanna say goodbye"
-];
+] as const;
