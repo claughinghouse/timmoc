@@ -18,8 +18,7 @@ jobs:
         with:
           version: "2.8.1"
           cache: true
-      - name: Install dependencies
-        run: aube install --frozen-lockfile
+          run-install: true
       - name: Check types, formatting, and lint
         run: aube run check
 
@@ -37,8 +36,7 @@ jobs:
         with:
           version: "2.8.1"
           cache: true
-      - name: Install dependencies
-        run: aube install --frozen-lockfile
+          run-install: true
       - name: Deploy production
         run: aube run deploy -- --yes --no-input
         env:
