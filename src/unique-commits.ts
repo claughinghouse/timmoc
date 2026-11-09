@@ -1,4 +1,4 @@
-import type { DurableObjectStorage } from "alchemy/Cloudflare/Workers/DurableObjectStorage";
+import type { DurableObjectStorage } from "@alchemy.run/cloudflare/Workers/DurableObjectStorage";
 import type { RuntimeContext } from "alchemy/RuntimeContext";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";

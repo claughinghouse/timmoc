@@ -1,5 +1,5 @@
 import { DurableObject } from "cloudflare:workers";
-import { fromDurableObjectStorage } from "alchemy/Cloudflare/Workers/DurableObjectStorage";
+import { fromDurableObjectStorage } from "@alchemy.run/cloudflare/Workers/DurableObjectStorage";
 import { RuntimeContext } from "alchemy/RuntimeContext";
 import * as Clock from "effect/Clock";
 import * as Effect from "effect/Effect";
