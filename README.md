@@ -60,6 +60,10 @@ Run `aube run check` and `aube run test`. Tests run in local workerd with real S
 
 Since most of my projects are solo ventures, I dislike spending time and creative juices creating commit messages that I may never see again. I would rather `git yeet` my changes and iterate rapidly.
 
+## AI-assisted development
+
+Read the [sanitized development conversation](./AI_DEVELOPMENT.md) for how the maintainer and an AI coding assistant built the opt-in routes, corrected design misunderstandings, tested the behavior, and investigated an Alchemy startup failure. It distinguishes AI used to develop the project from Workers AI used by the application, and records what was and was not verified.
+
 ## 🫶 Contributing
 
 Want to see your commit message added to the list? Submit a PR with your commit message added to the [quotes.ts](https://github.dev/claughinghouse/timmoc/blob/main/src/quotes.ts) file. If you want to add a new feature, please open an issue first.
