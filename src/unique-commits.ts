@@ -17,11 +17,10 @@ const historySchema = Schema.Struct({
 });
 const limitsSchema = Schema.Array(Schema.Number);
 
-/** Serializable outcomes shared by both HTTP routes and the Durable Object RPC. */
+/** Serializable outcomes returned by the per-IP history RPC. */
 export type CommitOutcome =
   | { readonly status: "ok"; readonly message: string }
-  | { readonly status: "limited"; readonly retryAfter: number }
-  | { readonly status: "unavailable" };
+  | { readonly status: "limited"; readonly retryAfter: number };
 
 /** Build the history handlers against the current Durable Object and generator services. */
 export const uniqueCommits = Effect.fnUntraced(function* (storage: DurableObjectStorage) {
@@ -98,18 +97,6 @@ export const uniqueCommits = Effect.fnUntraced(function* (storage: DurableObject
           messages: [...new Set([...history.messages, message])],
         });
         return { status: "ok", message };
-      }, lock.withPermits(1)),
-      generate: Effect.fn("commits.generateForIp")(function* (): Effect.fn.Return<
-        CommitOutcome,
-        never,
-        RuntimeContext
-      > {
-        const allowance = yield* reserve();
-        if (allowance.status === "limited") return allowance;
-        return yield* generator.generate(quotes).pipe(
-          Effect.map((message): CommitOutcome => ({ status: "ok", message })),
-          Effect.catch(() => Effect.succeed({ status: "unavailable" } as const)),
-        );
       }, lock.withPermits(1)),
       alarm: Effect.fnUntraced(function* () {
         const history = yield* readHistory;

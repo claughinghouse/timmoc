@@ -6,14 +6,14 @@ import * as Random from "effect/Random";
 import quotes from "./quotes.ts";
 import type { UniqueCommitHistory } from "./unique-commits.ts";
 
-/** Opt-in GET routes share per-IP AI limits; only /unique records message history. */
+/** /unique records per-IP history and generates only after catalog exhaustion. */
 export const app = Effect.fn("timmoc.request")(function* (histories: {
-  readonly getByName: (name: string) => Pick<UniqueCommitHistory, "next" | "generate">;
+  readonly getByName: (name: string) => Pick<UniqueCommitHistory, "next">;
 }) {
   const request = yield* HttpServerRequest.HttpServerRequest;
   const url = new URL(request.url, "https://timmoc.dev");
 
-  if (url.pathname === "/unique" || url.pathname === "/generate") {
+  if (url.pathname === "/unique") {
     const headers = { "cache-control": "private, no-store" };
     if (request.method !== "GET") {
       return HttpServerResponse.text(`Use GET ${url.pathname}`, {
@@ -37,7 +37,7 @@ export const app = Effect.fn("timmoc.request")(function* (histories: {
       byte.toString(16).padStart(2, "0"),
     ).join("");
     const history = histories.getByName(key);
-    return yield* (url.pathname === "/unique" ? history.next() : history.generate()).pipe(
+    return yield* history.next().pipe(
       Effect.map((outcome) => {
         switch (outcome.status) {
           case "ok":
@@ -46,11 +46,6 @@ export const app = Effect.fn("timmoc.request")(function* (histories: {
             return HttpServerResponse.text("AI rate limit exceeded; try again later", {
               status: 429,
               headers: { ...headers, "retry-after": String(outcome.retryAfter) },
-            });
-          case "unavailable":
-            return HttpServerResponse.text("Generation unavailable; try again later", {
-              status: 503,
-              headers,
             });
         }
       }),
