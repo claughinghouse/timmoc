@@ -64,7 +64,7 @@ Since most of my projects are solo ventures, I dislike spending time and creativ
 
 Production Alchemy deployments manage the complete `http_request_firewall_custom` phase for `timmoc.dev`. The source of truth is [`infra/waf.ts`](./infra/waf.ts), wired into [`alchemy.run.ts`](./alchemy.run.ts); non-production stages do not declare the zone or WAF resources.
 
-The policy preserves every path check exported from the existing **Drop Internet Background Radiation** rule and merges in an apex-only restriction to GET/HEAD requests on `/`, `/unique`, `/generate`, and common discovery paths. `/cdn-cgi/` paths are exempt from the path restriction. Existing probe checks retain their zone-wide scope. No existing ruleset or rule IDs are hard-coded; a stable rule `ref` identifies the declared policy.
+The **Drop Internet Background Radiation** rule blocks unsupported methods and paths on `timmoc.dev`: only GET/HEAD requests to `/`, `/unique`, `/generate`, and common discovery paths pass this rule. `/cdn-cgi/` paths are exempt from the path restriction, but not the method restriction. This replaces the old probe-path denylist instead of extending it; unknown paths are blocked regardless of their names. Other subdomains are outside this rule's scope. No existing ruleset or rule IDs are hard-coded; a stable rule `ref` identifies the declared policy.
 
 Cloudflare still uses the zone's existing custom-firewall phase entrypoint: this does not create a parallel firewall ruleset. **Declare every custom WAF rule in `infra/waf.ts`; later Alchemy updates can overwrite dashboard-only rules.** Add new application routes to the supported paths before deployment. Discovery paths are permitted by the WAF but still return the application's normal response (currently 404).
 
