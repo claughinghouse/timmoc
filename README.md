@@ -60,6 +60,16 @@ Run `aube run check` and `aube run test`. Tests run in local workerd with real S
 
 Since most of my projects are solo ventures, I dislike spending time and creative juices creating commit messages that I may never see again. I would rather `git yeet` my changes and iterate rapidly.
 
+## Production WAF policy
+
+Production Alchemy deployments manage the complete `http_request_firewall_custom` phase for `timmoc.dev`. The source of truth is [`infra/waf.ts`](./infra/waf.ts), wired into [`alchemy.run.ts`](./alchemy.run.ts); non-production stages do not declare the zone or WAF resources.
+
+The policy preserves every path check exported from the existing **Drop Internet Background Radiation** rule and merges in an apex-only restriction to GET/HEAD requests on `/`, `/unique`, `/generate`, and common discovery paths. `/cdn-cgi/` paths are exempt from the path restriction. Existing probe checks retain their zone-wide scope. No existing ruleset or rule IDs are hard-coded; a stable rule `ref` identifies the declared policy.
+
+Cloudflare still uses the zone's existing custom-firewall phase entrypoint: this does not create a parallel firewall ruleset. **Declare every custom WAF rule in `infra/waf.ts`; later Alchemy updates can overwrite dashboard-only rules.** Add new application routes to the supported paths before deployment. Discovery paths are permitted by the WAF but still return the application's normal response (currently 404).
+
+Run `aube run plan -- --adopt` to review the initial takeover and `aube run deploy` to apply. After the first deployment, `aube run plan` works without the adoption flag. The deploy script already uses `--adopt` to take over existing resources, including the zone, which Alchemy retains by default on removal. The deployment API token needs access to read/manage the zone and edit zone WAF rules, in addition to its existing Worker permissions. The policy does not protect the Worker's separate `workers.dev` or preview hostnames.
+
 ## AI-assisted development
 
 Read the [sanitized development conversation](./AI_DEVELOPMENT.md) for how the maintainer and an AI coding assistant built the opt-in routes, corrected design misunderstandings, tested the behavior, and investigated an Alchemy startup failure. It distinguishes AI used to develop the project from Workers AI used by the application, and records what was and was not verified.
