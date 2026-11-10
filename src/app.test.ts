@@ -86,6 +86,45 @@ it.effect(
     }),
 );
 
+it.effect("returns 503 with Retry-After after AI failures instead of a catalog message", () =>
+  Effect.gen(function* () {
+    const stub = env.HISTORY.getByName("http-unavailable");
+    const history = {
+      expiresAt: Date.now() + 60_000,
+      messages: quotes.map((quote) => quote.trim()),
+    };
+    yield* Effect.promise(() =>
+      runInDurableObject(stub, async (instance, state) => {
+        instance.failGeneration = true;
+        await state.storage.put("history", history);
+      }),
+    );
+    const result = yield* app({
+      getByName: () => ({ next: () => Effect.promise(async () => await stub.next()) }),
+    }).pipe(
+      Effect.provideService(
+        HttpServerRequest.HttpServerRequest,
+        HttpServerRequest.fromWeb(
+          new Request("https://timmoc.dev/unique", {
+            headers: { "cf-connecting-ip": "192.0.2.10" },
+          }),
+        ),
+      ),
+      Effect.provide(RuntimeContext.phantom),
+    );
+    expect(result.status).toBe(503);
+    expect(result.headers["retry-after"]).toBe("30");
+    expect(result.headers["cache-control"]).toBe("private, no-store");
+    expect(yield* Effect.promise(() => HttpServerResponse.toWeb(result).text())).toBe(
+      "Generation unavailable; try again later",
+    );
+    const stored = yield* Effect.promise(() =>
+      runInDurableObject(stub, (_, state) => state.storage.get("history")),
+    );
+    expect(stored).toEqual(history);
+  }),
+);
+
 it.effect("rejects missing/invalid IPs and non-GET methods before touching state", () =>
   Effect.gen(function* () {
     for (const [method, ip, status] of [

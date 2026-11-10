@@ -8,6 +8,10 @@ import { TestClock } from "effect/testing";
 import { CommitGenerator } from "./commit-generator.ts";
 import quotes from "./quotes.ts";
 
+const completion = (content: string) => ({
+  choices: [{ message: { content }, finish_reason: "stop" }],
+});
+
 it.effect("sends the full examples to the cheap model and returns a plain message", () =>
   Effect.gen(function* () {
     const generator = yield* CommitGenerator;
@@ -16,11 +20,14 @@ it.effect("sends the full examples to the cheap model and returns a plain messag
     Effect.provide(
       CommitGenerator.layer({
         run: (model, inputs) => {
-          expect(model).toBe("@cf/meta/llama-3.2-1b-instruct");
+          expect(model).toBe("@cf/ibm-granite/granite-4.0-h-micro");
+          const system = inputs.messages?.find((message) => message.role === "system")?.content;
+          expect(system).toContain("single plain-text line");
+          expect(system).toContain("Do not include line breaks, Markdown, code fences");
           expect(inputs.messages?.find((message) => message.role === "user")?.content).toBe(
             JSON.stringify(quotes),
           );
-          return Effect.succeed({ response: ' "Ship the tiny robot" ' });
+          return Effect.succeed(completion(' "Ship the tiny robot" '));
         },
       }),
     ),
@@ -35,7 +42,7 @@ it.effect("unwraps a model's fenced single-line response", () =>
   }).pipe(
     Effect.provide(
       CommitGenerator.layer({
-        run: () => Effect.succeed({ response: "```\nShip the tiny robot\n```" }),
+        run: () => Effect.succeed(completion("```\nShip the tiny robot\n```")),
       }),
     ),
     Effect.provide(RuntimeContext.phantom),
@@ -47,7 +54,15 @@ it.effect("classifies safe failure reasons without retaining raw provider errors
     for (const [run, reason] of [
       [() => Effect.fail({ secret: "must not enter diagnostics" }), "inference-failed"],
       [() => Effect.succeed({ unexpected: true }), "invalid-response"],
-      [() => Effect.succeed({ response: "" }), "invalid-message"],
+      [() => Effect.succeed(completion("")), "invalid-message"],
+      [() => Effect.succeed({ choices: [] }), "invalid-response"],
+      [
+        () =>
+          Effect.succeed({
+            choices: [{ message: { content: "partial" }, finish_reason: "length" }],
+          }),
+        "invalid-response",
+      ],
     ] as const) {
       const error = yield* Effect.gen(function* () {
         const generator = yield* CommitGenerator;
@@ -82,7 +97,7 @@ it.effect("rejects unusable AI output and oversized examples without an inferenc
         const generator = yield* CommitGenerator;
         return yield* generator.generate(quotes);
       }).pipe(
-        Effect.provide(CommitGenerator.layer({ run: () => Effect.succeed({ response }) })),
+        Effect.provide(CommitGenerator.layer({ run: () => Effect.succeed(completion(response)) })),
         Effect.provide(RuntimeContext.phantom),
         Effect.exit,
       );

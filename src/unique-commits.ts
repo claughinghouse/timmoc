@@ -20,7 +20,8 @@ const limitsSchema = Schema.Array(Schema.Number);
 /** Serializable outcomes returned by the per-IP history RPC. */
 export type CommitOutcome =
   | { readonly status: "ok"; readonly message: string }
-  | { readonly status: "limited"; readonly retryAfter: number };
+  | { readonly status: "limited"; readonly retryAfter: number }
+  | { readonly status: "unavailable" };
 
 /** Build the history handlers against the current Durable Object and generator services. */
 export const uniqueCommits = Effect.fnUntraced(function* (storage: DurableObjectStorage) {
@@ -63,6 +64,33 @@ export const uniqueCommits = Effect.fnUntraced(function* (storage: DurableObject
       return { status: "allowed" } as const;
     });
 
+    // One request owns at most three attempts and one shared 15-second budget.
+    // Reserve each attempt separately so retries cannot bypass the persisted IP limit.
+    const generate = Effect.fn("commits.generateWithRetries")(
+      function* (
+        examples: readonly string[],
+      ): Effect.fn.Return<CommitOutcome, never, RuntimeContext> {
+        for (let attempt = 0; attempt < 3; attempt++) {
+          if (attempt > 0) yield* Effect.sleep(attempt * 250);
+          const allowance = yield* reserve();
+          if (allowance.status === "limited") return allowance;
+          yield* Effect.annotateCurrentSpan("generation.attempts", attempt + 1);
+          const result = yield* generator.generate(examples).pipe(Effect.result);
+          if (result._tag === "Success") return { status: "ok", message: result.success };
+          yield* Effect.annotateCurrentSpan("generation.failure_reason", result.failure.reason);
+          // Bad input will not improve on a retry; don't spend the remaining allowance.
+          if (result.failure.reason === "invalid-examples") break;
+        }
+        return { status: "unavailable" };
+      },
+      Effect.timeout("15 seconds"),
+      Effect.catchTag("TimeoutError", () =>
+        Effect.annotateCurrentSpan("generation.failure_reason", "timeout").pipe(
+          Effect.as({ status: "unavailable" } as const),
+        ),
+      ),
+    );
+
     return {
       next: Effect.fn("commits.next")(function* (): Effect.fn.Return<
         CommitOutcome,
@@ -84,11 +112,9 @@ export const uniqueCommits = Effect.fnUntraced(function* (storage: DurableObject
         if (remaining.length > 0) {
           message = yield* Random.choice(remaining).pipe(Effect.orDie);
         } else {
-          const aiAllowance = yield* reserve();
-          if (aiAllowance.status === "limited") return aiAllowance;
-          message = yield* generator
-            .generate([...new Set([...catalog, ...history.messages])])
-            .pipe(Effect.catch(() => Random.choice(quotes)));
+          const outcome = yield* generate([...new Set([...catalog, ...history.messages])]);
+          if (outcome.status !== "ok") return outcome;
+          message = outcome.message;
         }
 
         // Persist before returning. Duplicates need no additional storage.

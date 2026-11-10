@@ -47,6 +47,11 @@ export const app = Effect.fn("timmoc.request")(function* (histories: {
               status: 429,
               headers: { ...headers, "retry-after": String(outcome.retryAfter) },
             });
+          case "unavailable":
+            return HttpServerResponse.text("Generation unavailable; try again later", {
+              status: 503,
+              headers: { ...headers, "retry-after": "30" },
+            });
         }
       }),
       Effect.catch(() =>
