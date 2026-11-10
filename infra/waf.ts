@@ -5,9 +5,9 @@ export const wafRules = [
   {
     ref: "drop_internet_background_radiation",
     description: "Drop Internet Background Radiation",
-    action: "block",
+    action: "managed_challenge",
     enabled: true,
-    // Discovery paths remain unblocked, even though the app currently returns 404.
+    // Keep robots.txt and common discovery paths outside the challenge.
     expression: `(lower(http.host) eq "timmoc.dev" and (
   not http.request.method in {"GET" "HEAD"}
   or (

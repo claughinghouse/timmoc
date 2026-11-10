@@ -39,6 +39,37 @@ it.effect("keeps / stateless and rejects removed/unknown routes without touching
   }),
 );
 
+it.effect("serves robots.txt without accessing IP history or AI", () =>
+  Effect.gen(function* () {
+    for (const [method, status] of [
+      ["GET", 200],
+      ["HEAD", 200],
+      ["POST", 405],
+    ] as const) {
+      const response = yield* app({
+        getByName: () => {
+          throw new Error("robots.txt must not access state or AI");
+        },
+      }).pipe(
+        Effect.provideService(
+          HttpServerRequest.HttpServerRequest,
+          HttpServerRequest.fromWeb(new Request("https://timmoc.dev/robots.txt", { method })),
+        ),
+        Effect.provide(RuntimeContext.phantom),
+      );
+      expect(response.status).toBe(status);
+      const body = yield* Effect.promise(() => HttpServerResponse.toWeb(response).text());
+      if (status === 200) {
+        expect(response.headers["content-type"]).toBe("text/plain; charset=utf-8");
+        expect(response.headers["cache-control"]).toBe("public, max-age=86400");
+        expect(body).toBe(method === "HEAD" ? "" : "User-agent: *\nDisallow: /\n");
+      } else {
+        expect(response.headers.allow).toBe("GET, HEAD");
+      }
+    }
+  }),
+);
+
 it.effect(
   "canonicalizes IPs, serves catalog first, then rate-limits generation after exhaustion",
   () =>

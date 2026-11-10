@@ -13,6 +13,23 @@ export const app = Effect.fn("timmoc.request")(function* (histories: {
   const request = yield* HttpServerRequest.HttpServerRequest;
   const url = new URL(request.url, "https://timmoc.dev");
 
+  if (url.pathname === "/robots.txt") {
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      return HttpServerResponse.text("Use GET or HEAD /robots.txt", {
+        status: 405,
+        headers: { allow: "GET, HEAD" },
+      });
+    }
+    const headers = {
+      "content-type": "text/plain; charset=utf-8",
+      "cache-control": "public, max-age=86400",
+    };
+    if (request.method === "HEAD") return HttpServerResponse.empty({ status: 200, headers });
+    // Inline the file in Worker builds without making Node's stack loader import raw text.
+    const { default: robots } = yield* Effect.promise(() => import("./robots.txt?raw"));
+    return HttpServerResponse.text(robots, { headers });
+  }
+
   if (url.pathname === "/unique") {
     const headers = { "cache-control": "private, no-store" };
     if (request.method !== "GET") {
