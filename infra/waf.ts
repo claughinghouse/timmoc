@@ -13,7 +13,7 @@ export const wafRules = [
   or (
     not http.request.uri.path in {
       "/" "/unique"
-      "/robots.txt" "/favicon.ico" "/.well-known/security.txt"
+      "/robots.txt" "/.well-known/security.txt"
     }
     and not starts_with(http.request.uri.path, "/cdn-cgi/")
   )
